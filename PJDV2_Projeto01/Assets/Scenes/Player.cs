@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     private Transform _transform;
     private Rigidbody2D _rigidbody2D;
+    private SpriteRenderer _spriteRenderer;
     
     public float velocidade = 10f;
     public float forcaPulo = 10f;
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
     {
         _transform = gameObject.transform;
         _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+        _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     
@@ -42,16 +44,18 @@ public class Player : MonoBehaviour
         
         Debug.Log("No Chao: " + noChao);
         
-        if(Input.GetKey(KeyCode.LeftArrow))
+        if(Input.GetKey(KeyCode.LeftArrow) )
         {
             _transform.position -= new Vector3(velocidade*Time.deltaTime,0,0);
            Debug.Log("LeftArrow");
+           _spriteRenderer.flipX = true;
         }
 
         if(Input.GetKey(KeyCode.RightArrow))
         {
            _transform.position += new Vector3(velocidade*Time.deltaTime,0,0);
            Debug.Log("RightArrow");
+           _spriteRenderer.flipX = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && noChao == true)
