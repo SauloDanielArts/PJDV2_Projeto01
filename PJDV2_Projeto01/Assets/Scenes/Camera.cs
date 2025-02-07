@@ -10,6 +10,8 @@ public class Camera : MonoBehaviour
     public float interpolacao = 12f;
     public SpriteRenderer _spriteRenderrer;
     
+    public float CamMoveSpeed = 5f;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -22,17 +24,23 @@ public class Camera : MonoBehaviour
         if (_spriteRenderrer.flipX == true)
         {
             //transform.position = new Vector3(_alvo2.position.x, _alvo2.position.y, transform.position.z);
-
-            Vector3 p = Vector3.Lerp(_alvo2.position, _alvo1.position, interpolacao*Time.deltaTime);
-            transform.position = new Vector3(p.x, p.y, transform.position.z);
-
             
+            transform.position = Vector3.Lerp(
+                transform.position, 
+                new Vector3(_alvo2.position.x,_alvo2.position.y,transform.position.z), 
+                CamMoveSpeed * Time.deltaTime);
+            
+
         }
         if (_spriteRenderrer.flipX == false)
         {
             //transform.position = new Vector3(_alvo1.position.x, _alvo1.position.y, transform.position.z);
-           Vector3 p = Vector3.Lerp(_alvo1.position, _alvo2.position, interpolacao*Time.deltaTime);
-           transform.position = new Vector3(p.x, p.y, transform.position.z);
+           
+            transform.position = Vector3.Lerp(
+                transform.position, 
+                new Vector3(_alvo1.position.x,_alvo1.position.y,transform.position.z), 
+                CamMoveSpeed * Time.deltaTime);
+            
         }
         
         
